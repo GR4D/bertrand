@@ -41,32 +41,24 @@ void setup() {
  digitalWrite(bckLight,HIGH);
 
   lcd.begin(16, 2);
-  lcd.print("Odpalam silnik");
-  lcd.setCursor(0,1);
-  lcd.print("BERTRAND");
   lcd.createChar(0, kropla);
  }
 
 void loop() {
 
 przyciskZabezpieczenie();
-lcdRefresh();
+//lcdRefresh();
 podswietlenie();
 digitalClockDisplay();
 godzinyWody();
  
 }
-//void isLocked(){
-//  if(!zabezpieczenie){
-//    isSafe = "Y";
-//  }else isSafe = "N";
-//}
 void lcdRefresh(){
   if(second()%30 == 0){
     lcd.clear();  
   }
-  
 }
+
 void LCDprint2digits(int number) {
   if (number >= 0 && number < 10) {
     lcd.write('0');
@@ -97,8 +89,6 @@ void digitalClockDisplay(){
     if(iloscWody<1000){
       lcd.print(" ml");
     } 
-   //}
-    
 }
 
 void przyciskZabezpieczenie(){
@@ -129,6 +119,7 @@ void podswietlenie(){
     iloscWody = 0;
   }
 }
+
 void godzinyWody(){
    // 6:00 AM 150ml 
      if( hour() == 6 && minute() == 0 && second() == 0 && zabezpieczenie){
