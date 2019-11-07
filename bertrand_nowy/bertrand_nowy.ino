@@ -94,7 +94,7 @@ void digitalClockDisplay(){
 void przyciskZabezpieczenie(){
   if(analogRead(A3)>100){
             zabezpieczenie = false;
-            isSafe = "N ";
+            isSafe = "NO ";
           }
            
   if(analogRead(A3)<100){
@@ -121,43 +121,74 @@ void podswietlenie(){
 }
 
 void godzinyWody(){
-   // 6:00 AM 150ml 
+   // 6:00 AM 50ml 
      if( hour() == 6 && minute() == 0 && second() == 0 && zabezpieczenie){
       digitalWrite(przekaznik,LOW);
-      delay(9500);
+      delay(3500);
       digitalWrite(przekaznik,HIGH);
-      iloscWody+= 150 ;
+      iloscWody+= 50 ;
      }
-     //////     
-    ///10:00 50ml
-    if( hour() == 10 && minute() == 0 && second() == 0 && zabezpieczenie){
+     //6:30 AM 50ml
+     if( hour() == 6 && minute() == 30 && second() == 0 && zabezpieczenie){
+      digitalWrite(przekaznik,LOW);
+      delay(3500);
+      digitalWrite(przekaznik,HIGH);
+      iloscWody+= 50 ;
+     }/////////////////100ml
+     //9:00 AM 50ml
+     if( hour() == 9 && minute() == 0 && second() == 0 && zabezpieczenie){
+      digitalWrite(przekaznik,LOW);
+      delay(3500);
+      digitalWrite(przekaznik,HIGH);
+      iloscWody+= 50 ;
+     }/////////////////150ml    
+    ///11:00 50ml
+    if( hour() == 11 && minute() == 0 && second() == 0 && zabezpieczenie){
       digitalWrite(przekaznik,LOW);
       delay(3500);
       digitalWrite(przekaznik,HIGH);
       iloscWody +=50 ;
-     }
-    ///// 
-    ///15:00 100ml
+     }/////////////////200ml
+    ///13:00 50ml
+    if( hour() == 13 && minute() == 0 && second() == 0 && zabezpieczenie){
+      digitalWrite(przekaznik,LOW);
+      delay(3500);
+      digitalWrite(przekaznik,HIGH);
+      iloscWody+= 50 ;
+     }////////////////////250ml
+    ///15:00 50ml
     if( hour() == 15 && minute() == 0 && second() == 0 && zabezpieczenie){
       digitalWrite(przekaznik,LOW);
-      delay(6500);
+      delay(3500);
       digitalWrite(przekaznik,HIGH);
-      iloscWody+= 100 ;
-     }
-    /////  
-    ///18:00 100ml
-    if( hour() == 18 && minute() == 0 && second() == 0 && zabezpieczenie){
+      iloscWody+= 50 ;
+     }/////////////////300ml 
+     ///17:00 50ml
+    if( hour() == 17 && minute() == 0 && second() == 0 && zabezpieczenie){
       digitalWrite(przekaznik,LOW);
-      delay(6500);
+      delay(3500);
       digitalWrite(przekaznik,HIGH);
-      iloscWody+= 100 ;
-     }
-    /////  
-    ///21:00 100ml
+      iloscWody+= 50 ;
+     }/////////////////350ml
+     ///19:00 50ml
+    if( hour() == 19 && minute() == 0 && second() == 0 && zabezpieczenie){
+      digitalWrite(przekaznik,LOW);
+      delay(3500);
+      digitalWrite(przekaznik,HIGH);
+      iloscWody+= 50 ;
+     }/////////////////400ml 
+    ///21:00 50ml
     if( hour() == 21 && minute() == 0 && second() == 0 && zabezpieczenie){
       digitalWrite(przekaznik,LOW);
-      delay(6500);
+      delay(3500);
       digitalWrite(przekaznik,HIGH);
-      iloscWody+= 100 ;
-     }
+      iloscWody+= 50 ;
+     }//////////////////450ml
+      ///21:30 50ml
+    if( hour() == 21 && minute() == 30 && second() == 0 && zabezpieczenie){
+      digitalWrite(przekaznik,LOW);
+      delay(3500);
+      digitalWrite(przekaznik,HIGH);
+      iloscWody+= 50 ;
+     }/////////////////500ml
 }
