@@ -192,3 +192,11 @@ void godzinyWody(){
       iloscWody+= 50 ;
      }/////////////////500ml
 }
+
+void testIlosci(){
+      delay(10000);
+      digitalWrite(przekaznik,LOW);
+      delay(3500);
+      digitalWrite(przekaznik,HIGH);
+      iloscWody+= 50 ;  
+}
