@@ -1,3 +1,4 @@
+//20.07.2020
 #include <LiquidCrystal.h>
 #include <Wire.h>
 #include <TimeLib.h>
@@ -108,22 +109,23 @@ void godzinyWody(){
   woda(15,0,0);
   woda(17,0,0);
   woda(19,0,0);
-  woda(21,0,0);
   woda(21,30,0);
 }
 
 void woda(int godzina, int minuta, int sekunda){
   if( hour() == godzina && minute() == minuta && second() == sekunda){
       digitalWrite(przekaznik,LOW);
-      delay(2000);
+      delay(2500);
       digitalWrite(przekaznik,HIGH);
       iloscWody+= 50 ;
   }
 }
 void testIlosci(){
+  if(!digitalRead(przycisk)){
       delay(1000);
       digitalWrite(przekaznik,LOW);
-      delay(6500);
+      delay(1300);
       digitalWrite(przekaznik,HIGH);
-      iloscWody+= 25 ;  
+      iloscWody+= 25 ;
+  }
 }
