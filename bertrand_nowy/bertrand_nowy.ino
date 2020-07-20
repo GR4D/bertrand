@@ -24,7 +24,6 @@ byte kropla[8] = {
   0b01110,
   0b00000
 };
-bool zabezpieczenie = false;
 
 void setup() {
   
@@ -37,8 +36,8 @@ void setup() {
  pinMode(A3,INPUT);
 
  digitalWrite(przekaznik,HIGH);
- analogWrite(kontrast,500 /4);
- digitalWrite(bckLight,HIGH);
+ analogWrite(kontrast,600 /4);
+ digitalWrite(bckLight,LOW);
 
   lcd.begin(16, 2);
   lcd.createChar(0, kropla);
@@ -46,11 +45,11 @@ void setup() {
 
 void loop() {
 
-przyciskZabezpieczenie();
 //lcdRefresh();
 podswietlenie();
 digitalClockDisplay();
 godzinyWody();
+testIlosci();
  
 }
 void lcdRefresh(){
@@ -91,25 +90,6 @@ void digitalClockDisplay(){
     } 
 }
 
-void przyciskZabezpieczenie(){
-  if(analogRead(A3)>100){
-            zabezpieczenie = false;
-            isSafe = "NO ";
-          }
-           
-  if(analogRead(A3)<100){
-    zabezpieczenie = true;
-    isSafe = "OK";
-  }
-   
-  if(!digitalRead(przycisk) && zabezpieczenie){
-    digitalWrite(przekaznik,LOW);
-     }
- if(digitalRead(przycisk) || zabezpieczenie==false){
-    digitalWrite(przekaznik,HIGH);
-  }
-}
-
 void podswietlenie(){
   if( hour()>=7 && hour()<=21) {
       digitalWrite(bckLight, HIGH);
@@ -121,82 +101,29 @@ void podswietlenie(){
 }
 
 void godzinyWody(){
-   // 6:00 AM 50ml 
-     if( hour() == 6 && minute() == 0 && second() == 0 && zabezpieczenie){
-      digitalWrite(przekaznik,LOW);
-      delay(3500);
-      digitalWrite(przekaznik,HIGH);
-      iloscWody+= 50 ;
-     }
-     //6:30 AM 50ml
-     if( hour() == 6 && minute() == 30 && second() == 0 && zabezpieczenie){
-      digitalWrite(przekaznik,LOW);
-      delay(3500);
-      digitalWrite(przekaznik,HIGH);
-      iloscWody+= 50 ;
-     }/////////////////100ml
-     //9:00 AM 50ml
-     if( hour() == 9 && minute() == 0 && second() == 0 && zabezpieczenie){
-      digitalWrite(przekaznik,LOW);
-      delay(3500);
-      digitalWrite(przekaznik,HIGH);
-      iloscWody+= 50 ;
-     }/////////////////150ml    
-    ///11:00 50ml
-    if( hour() == 11 && minute() == 0 && second() == 0 && zabezpieczenie){
-      digitalWrite(przekaznik,LOW);
-      delay(3500);
-      digitalWrite(przekaznik,HIGH);
-      iloscWody +=50 ;
-     }/////////////////200ml
-    ///13:00 50ml
-    if( hour() == 13 && minute() == 0 && second() == 0 && zabezpieczenie){
-      digitalWrite(przekaznik,LOW);
-      delay(3500);
-      digitalWrite(przekaznik,HIGH);
-      iloscWody+= 50 ;
-     }////////////////////250ml
-    ///15:00 50ml
-    if( hour() == 15 && minute() == 0 && second() == 0 && zabezpieczenie){
-      digitalWrite(przekaznik,LOW);
-      delay(3500);
-      digitalWrite(przekaznik,HIGH);
-      iloscWody+= 50 ;
-     }/////////////////300ml 
-     ///17:00 50ml
-    if( hour() == 17 && minute() == 0 && second() == 0 && zabezpieczenie){
-      digitalWrite(przekaznik,LOW);
-      delay(3500);
-      digitalWrite(przekaznik,HIGH);
-      iloscWody+= 50 ;
-     }/////////////////350ml
-     ///19:00 50ml
-    if( hour() == 19 && minute() == 0 && second() == 0 && zabezpieczenie){
-      digitalWrite(przekaznik,LOW);
-      delay(3500);
-      digitalWrite(przekaznik,HIGH);
-      iloscWody+= 50 ;
-     }/////////////////400ml 
-    ///21:00 50ml
-    if( hour() == 21 && minute() == 0 && second() == 0 && zabezpieczenie){
-      digitalWrite(przekaznik,LOW);
-      delay(3500);
-      digitalWrite(przekaznik,HIGH);
-      iloscWody+= 50 ;
-     }//////////////////450ml
-      ///21:30 50ml
-    if( hour() == 21 && minute() == 30 && second() == 0 && zabezpieczenie){
-      digitalWrite(przekaznik,LOW);
-      delay(3500);
-      digitalWrite(przekaznik,HIGH);
-      iloscWody+= 50 ;
-     }/////////////////500ml
+  woda(6,0,0);
+  woda(9,0,0);
+  woda(11,0,0);
+  woda(13,0,0);
+  woda(15,0,0);
+  woda(17,0,0);
+  woda(19,0,0);
+  woda(21,0,0);
+  woda(21,30,0);
 }
 
-void testIlosci(){
-      delay(10000);
+void woda(int godzina, int minuta, int sekunda){
+  if( hour() == godzina && minute() == minuta && second() == sekunda){
       digitalWrite(przekaznik,LOW);
-      delay(3500);
+      delay(2000);
       digitalWrite(przekaznik,HIGH);
-      iloscWody+= 50 ;  
+      iloscWody+= 50 ;
+  }
+}
+void testIlosci(){
+      delay(1000);
+      digitalWrite(przekaznik,LOW);
+      delay(6500);
+      digitalWrite(przekaznik,HIGH);
+      iloscWody+= 25 ;  
 }
